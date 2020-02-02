@@ -15,7 +15,7 @@ npm i -D less-loader
 ```
 npm i -D node-sass sass-loader
 ```
-- [ ] [Препроцессоры: Оптимизачия конфига](https://youtu.be/eSaF8NXeNsA?t=7703)
+- [ ] [Препроцессоры: Оптимизация конфига](https://youtu.be/eSaF8NXeNsA?t=7703)
 ```js
 const cssLoaders = extra => {
   const loaders = [
