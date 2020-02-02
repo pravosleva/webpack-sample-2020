@@ -1,12 +1,37 @@
 const path = require('path');
-// Plugins - Доп функционал в видеклассов, который может быть добавлен к базовой
-// конфигурации webpack
+// Plugins - Доп функционал в виде классов, который может быть добавлен к
+// базовой конфигурации webpack
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// For prod only:
+const OptimizeCssWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+
+const isDev = process.env.NODE_ENV === 'development';
+const isProd = !isDev;
+const optimization = () => {
+  const config = {
+    splitChunks: {
+      chunks: 'all',
+    },
+  };
+
+  if (isProd) {
+    config.minimizer = [
+      new OptimizeCssWebpackPlugin(),
+      new TerserWebpackPlugin(),
+    ];
+  }
+
+  return config;
+};
 
 module.exports = {
   devServer: {
     port: 8000,
+    hot: isDev,
   },
   context: path.resolve(__dirname, 'src'), // dir where source code is placed
   // mode: 'development', // Указано в package.json
@@ -27,12 +52,26 @@ module.exports = {
       '@alias-tst': path.resolve(__dirname, 'src/alias-tst'),
     },
   },
+  optimization: optimization(),
   plugins: [
     // Каждый плагин может быть добавлен в виде нового инстанса своего класса:
     new HTMLWebpackPlugin({
       template: './index.html',
+      minify: {
+        collapseWhitespace: isProd, // Для максимальной оптимизации выходных
+        // файлов
+      },
     }),
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([ // Для каждого элемента копирования указываем объект
+      {
+        from: path.resolve(__dirname, 'src/favicon.ico'),
+        to: path.resolve(__dirname, 'dist'),
+      },
+    ]),
+    new MiniCssExtractPlugin({ // Для формирование файла со стилями
+      filename: '[name].[contenthash].css',
+    }),
   ],
   module: {
     // webpack понимает только js, json
@@ -45,7 +84,14 @@ module.exports = {
         // лоадеров:
         test: /\.css$/, // Тип лоадеров для .css
         use: [
-          'style-loader', // 2. Добавляет стили в секцию head
+          // 'style-loader', // 2.v1 Добавляет стили в секцию head
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev,
+              reloadAll: true,
+            },
+          }, // 2.v2
           'css-loader', // 1. Для импортов .css в файлы .js
         ], // Порядок важен! webpack идет справа налево (сверху вниз)
       },
