@@ -6,7 +6,8 @@
   "scripts": {
     "build:dev": "webpack --mode development",
     "build:prod": "webpack --mode production",
-    "dev": "webpack --mode development --watch"
+    "watch": "webpack --mode development --watch",
+    "dev": "webpack-dev-server --mode development --open"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,8 @@
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^1.1.3",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2"
   },
   "dependencies": {
     "normalize.css": "^8.0.1"
