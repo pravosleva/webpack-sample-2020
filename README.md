@@ -44,12 +44,12 @@ module.exports = {
   ]
 // ...
 ```
-- [ ] [Зачем нужен Babel](https://youtu.be/eSaF8NXeNsA?t=7861)
+- [x] [Зачем нужен Babel](https://youtu.be/eSaF8NXeNsA?t=7861)
 - [x] [Добавление плагинов для Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s)
 ```
 npm i -D babel-loader @babel/core
 ```
-- [ ] [Babel: Пресеты и плагины](https://youtu.be/eSaF8NXeNsA?t=8153)
+- [x] [Babel: Пресеты и плагины](https://youtu.be/eSaF8NXeNsA?t=8153)
 > **Пресет** - Набор плагинов, для работы с js в современном формате.
 ```
 npm i -D @babel/preset-env
