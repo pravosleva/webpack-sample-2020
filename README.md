@@ -88,5 +88,7 @@ module.exports = {
     main: ['@babel/polyfill', './index.js'],
 // ...
 ```
+- [x] `@babel/plugin-proposal-class-properties`
+> class - Пока еще не стандарт языка (только предложение)
 - [ ] [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
 - [ ] [Компиляция React JSX + оптимизация Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s)
