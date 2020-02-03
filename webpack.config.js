@@ -49,6 +49,7 @@ module.exports = {
     port: 8000,
     hot: isDev,
   },
+  devtool: isDev ? 'source-map' : '',
   context: path.resolve(__dirname, 'src'), // dir where source code is placed
   // mode: 'development', // Указано в package.json
   entry: {
