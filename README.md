@@ -183,7 +183,7 @@ _`.eslintrc`_
 npm i lodash
 ```
 _`sample.js`_
-```
+```js
 // ...
 import('lodash').then(_ => {
   console.log('Lodash', _.random(0, 42, true));
