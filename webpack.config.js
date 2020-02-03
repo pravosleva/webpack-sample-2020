@@ -117,6 +117,10 @@ module.exports = {
             presets: [
               '@babel/preset-env',
             ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties', // class - это еще не
+              // стандарт языка (только предложение)
+            ],
           },
         },
       }
