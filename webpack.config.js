@@ -28,7 +28,8 @@ const optimization = () => {
 
   return config;
 };
-const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+// const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+const filename = ext => isDev ? `[name].${ext}` : `[name].no-hash-special-for-victor.${ext}`;
 const babelOptions = preset => {
   const opts = {
     presets: [
