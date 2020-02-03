@@ -45,7 +45,10 @@ module.exports = {
 // ...
 ```
 - [ ] [Зачем нужен Babel](https://youtu.be/eSaF8NXeNsA?t=7861)
-- [ ] [Добавление плагинов для Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s)
+- [x] [Добавление плагинов для Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s)
+```
+npm i -D babel-loader @babel/core
+```
 - [ ] `@babel/polyfill` usage
 ```js
 // ...

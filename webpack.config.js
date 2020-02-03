@@ -103,6 +103,11 @@ module.exports = {
       {
         test: /\.(ttf|woff|woff2)$/,
         use: ['file-loader'],
+      },
+      { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
       }
     ]
   }
