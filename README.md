@@ -190,4 +190,46 @@ import('lodash').then(_ => {
 });
 ```
 > After build we have additional separate chunk `dist/[name].js`
-- [ ] webpack-bundle-analyzer
+- [x] [webpack-bundle-analyzer usage]()
+> Плагин для анализа библиотек для оптимизации приложения
+```
+npm i webpack-bundle-analyzer -D
+```
+_`webpack.config.js`_
+```
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// ...
+const plugins = () => {
+  const base = [
+    // Каждый плагин может быть добавлен в виде нового инстанса своего класса:
+    new HTMLWebpackPlugin({
+      template: './index.html',
+      minify: {
+        collapseWhitespace: isProd, // Для максимальной оптимизации выходных
+        // файлов
+      },
+    }),
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([ // Для каждого элемента копирования указываем объект
+      {
+        from: path.resolve(__dirname, 'src/favicon.ico'),
+        to: path.resolve(__dirname, 'dist'),
+      },
+    ]),
+    new MiniCssExtractPlugin({ // Для формирование файла со стилями
+      filename: filename('css'),
+    }),
+  ];
+
+  if (isProd) base.push(new BundleAnalyzerPlugin());
+
+  return base;
+};
+// ...
+module: {
+  // ...
+  plugins: plugins(),
+}
+```
+> After `npm run build:prod` we have working server on [127.0.0.1](http://127.0.0.1:8888) to see analysis.
+> And also you can use `npm run stats` for have `stats.json` file as result.

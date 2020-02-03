@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // For prod only:
 const OptimizeCssWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
@@ -53,6 +54,32 @@ const jsLoaders = () => {
 
   return loaders;
 };
+const plugins = () => {
+  const base = [
+    // Каждый плагин может быть добавлен в виде нового инстанса своего класса:
+    new HTMLWebpackPlugin({
+      template: './index.html',
+      minify: {
+        collapseWhitespace: isProd, // Для максимальной оптимизации выходных
+        // файлов
+      },
+    }),
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([ // Для каждого элемента копирования указываем объект
+      {
+        from: path.resolve(__dirname, 'src/favicon.ico'),
+        to: path.resolve(__dirname, 'dist'),
+      },
+    ]),
+    new MiniCssExtractPlugin({ // Для формирование файла со стилями
+      filename: filename('css'),
+    }),
+  ];
+
+  if (isProd) base.push(new BundleAnalyzerPlugin());
+
+  return base;
+};
 
 module.exports = {
   devServer: {
@@ -84,26 +111,7 @@ module.exports = {
     },
   },
   optimization: optimization(),
-  plugins: [
-    // Каждый плагин может быть добавлен в виде нового инстанса своего класса:
-    new HTMLWebpackPlugin({
-      template: './index.html',
-      minify: {
-        collapseWhitespace: isProd, // Для максимальной оптимизации выходных
-        // файлов
-      },
-    }),
-    new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([ // Для каждого элемента копирования указываем объект
-      {
-        from: path.resolve(__dirname, 'src/favicon.ico'),
-        to: path.resolve(__dirname, 'dist'),
-      },
-    ]),
-    new MiniCssExtractPlugin({ // Для формирование файла со стилями
-      filename: filename('css'),
-    }),
-  ],
+  plugins: plugins(),
   module: {
     // webpack понимает только js, json
     // Требуется расширение функционала: сущность loader - возможность работы с
