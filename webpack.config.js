@@ -28,6 +28,21 @@ const optimization = () => {
   return config;
 };
 const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+const babelOptions = preset => {
+  const opts = {
+    presets: [
+      '@babel/preset-env',
+    ],
+    plugins: [
+      '@babel/plugin-proposal-class-properties', // class - это еще не
+      // стандарт языка (только предложение)
+    ],
+  }
+
+  if (preset) opts.presets.push(preset);
+
+  return opts;
+};
 
 module.exports = {
   devServer: {
@@ -40,7 +55,7 @@ module.exports = {
     main: [
       '@babel/polyfill', // Для async/await одних пресетов недостаточно (нужно
       // установить полифил)
-      './index.js',
+      './index.jsx',
     ],
   },
   output: {
@@ -113,15 +128,16 @@ module.exports = {
         exclude: /node_modules/,
         loader: {
           loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-            ],
-            plugins: [
-              '@babel/plugin-proposal-class-properties', // class - это еще не
-              // стандарт языка (только предложение)
-            ],
-          },
+          options: babelOptions(),
+        },
+      },
+      // TODO: @babel/preset-typescript
+      { // React
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: babelOptions('@babel/preset-react'),
         },
       }
     ]

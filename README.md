@@ -91,4 +91,38 @@ module.exports = {
 - [x] `@babel/plugin-proposal-class-properties`
 > class - Пока еще не стандарт языка (только предложение)
 - [ ] [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
-- [ ] [Компиляция React JSX + оптимизация Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s)
+```
+npm i -D @babel/preset-typescript
+```
+- [x] [Компиляция React JSX + оптимизация Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s)
+```
+npm i -D @babel/preset-react
+```
+_`webpack.config.js`_
+```
+// ...
+const babelOptions = preset => {
+  const opts = {
+    presets: ['@babel/preset-env'],
+    plugins: ['@babel/plugin-proposal-class-properties'],
+  };
+
+  if (preset) opts.presets.push(preset);
+
+  return opts;
+};
+// ...
+module: {
+  rules: [
+    // ...
+    {
+      test: /\.jsx$/,
+      exclude: /node_modules/,
+      loader: {
+        loader: 'babel-loader',
+        options: babelOptions('@babel/preset-react'),
+      },
+    },
+  ]
+}
+```
