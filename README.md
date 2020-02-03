@@ -233,3 +233,25 @@ module: {
 ```
 > After `npm run build:prod` we have working server on [127.0.0.1](http://127.0.0.1:8888) to see analysis.
 > And also you can use `npm run stats` for have `stats.json` file as result.
+- [ ] `postbuild.sh` (in progress)
+_`webpack.config.js`_
+```js
+// ...
+const plugins = () => {
+  // ...
+  if (isProd) base.push(new BundleAnalyzerPlugin({
+    openAnalyzer: false,
+    analyzerMode: 'static',
+  }));
+  return base;
+};
+```
+_`package.json`_
+```js
+"scripts": {
+  "postbuild": "bash postbuild.sh",
+  // ...
+  "build:prod": "cross-env NODE_ENV=production webpack --mode production && npm run postbuild",
+  // ...
+},
+```

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postbuild": "bash postbuild.sh",
     "build:dev": "cross-env NODE_ENV=development webpack --mode development",
-    "build:prod": "cross-env NODE_ENV=production webpack --mode production",
+    "build:prod": "cross-env NODE_ENV=production webpack --mode production && npm run postbuild",
     "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"

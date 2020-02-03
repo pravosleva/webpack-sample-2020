@@ -76,7 +76,10 @@ const plugins = () => {
     }),
   ];
 
-  if (isProd) base.push(new BundleAnalyzerPlugin());
+  if (isProd) base.push(new BundleAnalyzerPlugin({
+    openAnalyzer: false,
+    analyzerMode: 'static',
+  }));
 
   return base;
 };
