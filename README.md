@@ -89,7 +89,7 @@ module.exports = {
 // ...
 ```
 - [x] `@babel/plugin-proposal-class-properties`
-> class - Пока еще не стандарт языка (только предложение)
+> **class** - Пока еще не стандарт языка (только предложение)
 - [ ] [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
 ```
 npm i -D @babel/preset-typescript
@@ -178,3 +178,16 @@ _`.eslintrc`_
   ]
 }
 ```
+- [x] [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
+```
+npm i lodash
+```
+_`sample.js`_
+```
+// ...
+import('lodash').then(_ => {
+  console.log('Lodash', _.random(0, 42, true));
+});
+```
+> After build we have additional separate chunk `dist/[name].js`
+- [ ] webpack-bundle-analyzer

@@ -10,7 +10,12 @@ tst();
 console.log(WebpackLogo); // abd62e9b6096047730911a83833b04b6.png
 
 const App = () => (
-  <div>Hello jsx x</div>
+  <div>Hello jsx</div>
 );
 
 render(<App />, document.getElementById('app'));
+
+// Dynamic import sample: npm i lodash
+// import('lodash').then(_ => {
+//   console.log('Lodash', _.random(0, 42, true));
+// });
