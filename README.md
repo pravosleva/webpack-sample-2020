@@ -49,7 +49,37 @@ module.exports = {
 ```
 npm i -D babel-loader @babel/core
 ```
-- [ ] `@babel/polyfill` usage
+- [ ] [Babel: Пресеты и плагины](https://youtu.be/eSaF8NXeNsA?t=8153)
+> **Пресет** - Набор плагинов, для работы с js в современном формате.
+```
+npm i -D @babel/preset-env
+```
+_`webpack.config.js`_
+```js
+// ...
+module: {
+  rules: [
+    // ...
+    { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            '@babel/preset-env',
+          ],
+        },
+      },
+    }
+  ]
+}
+```
+_`package.json`_
+```json
+"browserlist": "> 0.25%, not dead",
+```
+- [ ] `@babel/polyfill` (as lib) usage
 ```js
 // ...
 module.exports = {

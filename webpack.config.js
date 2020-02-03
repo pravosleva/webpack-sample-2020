@@ -37,7 +37,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'), // dir where source code is placed
   // mode: 'development', // Указано в package.json
   entry: {
-    main: './index.js',
+    main: ['@babel/polyfill', './index.js'],
   },
   output: {
     filename: filename('js'),
@@ -107,7 +107,14 @@ module.exports = {
       { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+            ],
+          },
+        },
       }
     ]
   }
