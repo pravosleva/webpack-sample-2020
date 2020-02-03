@@ -43,6 +43,16 @@ const babelOptions = preset => {
 
   return opts;
 };
+const jsLoaders = () => {
+  const loaders = [{
+    loader: 'babel-loader',
+    options: babelOptions(),
+  }];
+
+  if (isDev) loaders.push('eslint-loader');
+
+  return loaders;
+};
 
 module.exports = {
   devServer: {
@@ -127,19 +137,19 @@ module.exports = {
       { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: {
-          loader: 'babel-loader',
-          options: babelOptions(),
-        },
+        use: jsLoaders(),
       },
       // TODO: @babel/preset-typescript
       { // React
         test: /\.jsx$/,
         exclude: /node_modules/,
-        loader: {
-          loader: 'babel-loader',
-          options: babelOptions('@babel/preset-react'),
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+            options: babelOptions('@babel/preset-react'),
+          },
+          // 'eslint-loader',
+        ],
       }
     ]
   }

@@ -10,3 +10,5 @@ class Util {
 }
 
 console.log('Util Id:', Util.id);
+
+const unused = 42; // eslint warning sample

@@ -126,4 +126,55 @@ module: {
   ]
 }
 ```
-- [x] source-map
+- [x] source-map for dev mode
+- [x] ESLint
+```
+npm i -D eslint-loader
+npm i -D babel-eslint
+npm i -D eslint
+npm i -D babel-eslint
+
+```
+_`webpack.config.js`_
+```js
+// ...
+const jsLoaders = () => {
+  const loaders = [{
+    loader: 'babel-loader',
+    options: babelOptions(),
+  }];
+
+  if (isDev) loaders.push('eslint-loader');
+
+  return loaders;
+};
+// ...
+module = {
+  rules: [
+    // ...
+    { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: jsLoaders(), // Уже с учетом eslint-loader
+    },
+    // ...
+  ],
+};
+```
+_`.eslintrc`_
+```js
+{
+  "parser": "babel-eslint", // По умолчанию eslint не знает, что мы работаем с
+  // babel. Указываем это явно как парсер.
+  "rules": {
+    "no-used-vars": "warn"
+  },
+  "env": { // Указываем явно где мы работаем с eslint
+    "es6": true,
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ]
+}
+```

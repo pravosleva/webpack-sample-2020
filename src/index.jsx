@@ -10,7 +10,7 @@ tst();
 console.log(WebpackLogo); // abd62e9b6096047730911a83833b04b6.png
 
 const App = () => (
-  <div>Hello jsx</div>
+  <div>Hello jsx x</div>
 );
 
 render(<App />, document.getElementById('app'));
