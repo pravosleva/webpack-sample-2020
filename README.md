@@ -99,7 +99,7 @@ npm i -D @babel/preset-typescript
 npm i -D @babel/preset-react
 ```
 _`webpack.config.js`_
-```
+```js
 // ...
 const babelOptions = preset => {
   const opts = {
@@ -162,7 +162,7 @@ module = {
 };
 ```
 _`.eslintrc`_
-```js
+```json
 {
   "parser": "babel-eslint", // По умолчанию eslint не знает, что мы работаем с
   // babel. Указываем это явно как парсер.
@@ -196,7 +196,7 @@ import('lodash').then(_ => {
 npm i webpack-bundle-analyzer -D
 ```
 _`webpack.config.js`_
-```
+```js
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // ...
 const plugins = () => {
