@@ -1,13 +1,4 @@
-
-echo "HELLO"
-echo $?
-
-echo -ne '#####                     (33%)\r'
-sleep 1
-echo -ne '#############             (66%)\r'
-sleep 1
-echo -ne '#######################   (100%)\r'
-echo -ne '\n'
+#!/bin/bash
 
 # 1
 # find ./dist/* -name '*main.*.css'
@@ -19,6 +10,7 @@ echo -ne '\n'
 # for f in ./dist/*main.*.css; do echo $f; done;
 
 # 3
+echo -ne '                          (0%)\r'
 # CSS
 if [ ! -d "dist/css" ]; then
   mkdir "dist/css"
@@ -29,6 +21,7 @@ if [ ! -d "dist/css" ]; then
     exit 1
   fi
 fi
+echo -ne '##                        (10%)\r'
 # JS
 if [ ! -d "dist/js" ];
 then
@@ -40,6 +33,7 @@ then
     exit 1
   fi
 fi
+echo -ne '####                      (20%)\r'
 # FONTS: .ttf
 if [ ! -d "dist/fonts" ];
 then
@@ -51,6 +45,7 @@ then
     exit 1
   fi
 fi
+echo -ne '######                    (30%)\r'
 # IMG: .png, .ico
 if [ ! -d "dist/img" ];
 then
@@ -63,6 +58,9 @@ then
     exit 1
   fi
 fi
+echo -ne '########                  (40%)\r'
+sleep 1
+echo -ne '########################  (100%)\r'
 
 # 4
 # cd dist/css/ &&
