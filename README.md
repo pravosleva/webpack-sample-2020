@@ -79,7 +79,8 @@ _`package.json`_
 ```json
 "browserlist": "> 0.25%, not dead",
 ```
-- [ ] `@babel/polyfill` (as lib) usage
+- [x] `@babel/polyfill` (as lib) usage
+> Для async/await одних пресетов недостаточно (нужно установить полифил).
 ```js
 // ...
 module.exports = {

@@ -37,7 +37,11 @@ module.exports = {
   context: path.resolve(__dirname, 'src'), // dir where source code is placed
   // mode: 'development', // Указано в package.json
   entry: {
-    main: ['@babel/polyfill', './index.js'],
+    main: [
+      '@babel/polyfill', // Для async/await одних пресетов недостаточно (нужно
+      // установить полифил)
+      './index.js',
+    ],
   },
   output: {
     filename: filename('js'),
