@@ -162,7 +162,7 @@ module = {
 };
 ```
 _`.eslintrc`_
-```json
+```js
 {
   "parser": "babel-eslint", // По умолчанию eslint не знает, что мы работаем с
   // babel. Указываем это явно как парсер.
