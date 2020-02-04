@@ -1,60 +1,80 @@
 #!/bin/bash
 
 # 1
-# find ./dist/* -name '*main.*.css'
+# find ./build/* -name '*main.*.css'
 # OUTPUT:
-# ./dist/main.c806333b81395a0e1e36.css
-# ./dist/vendors~main.c806333b81395a0e1e36.css
+# ./build/main.c806333b81395a0e1e36.css
+# ./build/vendors~main.c806333b81395a0e1e36.css
 
 # 2
-# for f in ./dist/*main.*.css; do echo $f; done;
+# for f in ./build/*main.*.css; do echo $f; done;
 
-# 3
+# 3: Copy result of build to build/ forlder for production
+if [ ! -d "build" ];
+then
+  mkdir "build"
+  if [ ! $? -eq 0 ]; then
+    echo "ERROR: build/ could not be created!"
+    exit 1
+  fi
+else
+  rm -rf build/*;
+fi
 echo -ne '                          (0%)\r'
+echo '<?php
+echo "
+<html>
+<head>
+	<title>403 Forbidden</title>
+</head>
+<body>
+  <p>Directory access is forbidden.</p>
+</body>
+</html>";' > './build/index.php'
 # CSS
-if [ ! -d "dist/css" ]; then
-  mkdir "dist/css"
+if [ ! -d "build/css" ]; then
+  mkdir "build/css"
   if [ $? -eq 0 ]; then
-    for i in ./dist/*main.*.css; do cp $i "dist/css"; done;
+    for i in ./dist/*main.*.css; do cp $i "build/css"; done;
   else
-    echo "ERROR: dist/css could not be created!"
+    echo "ERROR: build/css could not be created!"
     exit 1
   fi
 fi
 echo -ne '##                        (10%)\r'
 # JS
-if [ ! -d "dist/js" ];
+if [ ! -d "build/js" ];
 then
-  mkdir "dist/js"
+  mkdir "build/js"
   if [ $? -eq 0 ]; then
-    for i in ./dist/*main.*.js; do cp $i "dist/js"; done;
+    for i in ./dist/*main.*.js; do cp $i "build/js"; done;
   else
-    echo "ERROR: dist/js could not be created!"
+    echo "ERROR: build/js could not be created!"
     exit 1
   fi
 fi
 echo -ne '####                      (20%)\r'
 # FONTS: .ttf
-if [ ! -d "dist/fonts" ];
+if [ ! -d "build/fonts" ];
 then
-  mkdir "dist/fonts"
+  mkdir "build/fonts"
   if [ $? -eq 0 ]; then
-    for i in ./dist/*.ttf; do cp $i "dist/fonts"; done;
+    for i in ./dist/*.ttf; do cp $i "build/fonts"; done;
   else
-    echo "ERROR: dist/fonts could not be created!"
+    echo "ERROR: build/fonts could not be created!"
     exit 1
   fi
 fi
 echo -ne '######                    (30%)\r'
 # IMG: .png, .ico
-if [ ! -d "dist/img" ];
+if [ ! -d "build/img" ];
 then
-  mkdir "dist/img"
+  mkdir "build/img"
   if [ $? -eq 0 ]; then
-    for i in ./dist/*.png; do cp $i "dist/img"; done;
-    for i in ./dist/*.ico; do cp $i "dist/img"; done;
+    for i in ./dist/*.png; do cp $i "build/img"; done;
+    for i in ./dist/*.ico; do cp $i "build/img"; done;
   else
-    echo "ERROR: dist/img could not be created!"
+    echo "ERROR: build/img could not be created!"
     exit 1
   fi
 fi
@@ -63,7 +83,7 @@ sleep 1
 echo -ne '########################  (100%)\r'
 
 # 4
-# cd dist/css/ &&
+# cd build/css/ &&
 # for i in ./*main.*.css; do cp $i `echo $i | sed "s/${$i}/output.css/g"`; done
 # for i in ./*main.*.css; do openssl dgst -md4 $i; done
 
