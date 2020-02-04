@@ -233,7 +233,7 @@ module: {
 ```
 > After `npm run build:prod` we have working server on [127.0.0.1](http://127.0.0.1:8888) to see analysis.
 > And also you can use `npm run stats` for have `stats.json` file as result.
-- [ ] `postbuild.sh` (in progress)
+- [ ] `postbuild.sh` (in progress)  
 _`webpack.config.js`_
 ```js
 // ...
@@ -254,4 +254,25 @@ _`package.json`_
   "build:prod": "cross-env NODE_ENV=production webpack --mode production && npm run postbuild",
   // ...
 },
+```
+- [ ] `styled-components`
+```
+npm i -D babel-plugin-styled-components styled-components
+```
+_`webpack.config.js`_
+```js
+// ...
+const babelOptions = preset => {
+  const opts = {
+    // ...
+    plugins: [
+      // ...
+      'babel-plugin-styled-components',
+      // See also https://styled-components.com/docs/tooling#usage
+    ],
+  }
+  // ...
+  return opts;
+};
+// ...
 ```
