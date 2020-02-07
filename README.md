@@ -285,7 +285,7 @@ _`package.json`_
 
 ### global-scripts-sample
 _`webpack.config.js`_
-```
+```js
 entry: {
   main: ['@babel/polyfill', './index.jsx'],
   // For example:
