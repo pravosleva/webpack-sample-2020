@@ -154,11 +154,7 @@ module: {
 
 ### eslint
 ```
-npm i -D eslint-loader
-npm i -D babel-eslint
-npm i -D eslint
-npm i -D babel-eslint
-
+npm i -D eslint-loader babel-eslint eslint babel-eslint
 ```
 _`webpack.config.js`_
 ```js
@@ -260,7 +256,8 @@ module: {
 ```
 > After `npm run build:prod` we have working server on [127.0.0.1](http://127.0.0.1:8888) to see analysis.
 > And also you can use `npm run stats` for have `stats.json` file as result.
-- [ ] `postbuild.sh` (in progress)  
+
+### postbuild-script-sample
 _`webpack.config.js`_
 ```js
 // ...
