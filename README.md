@@ -22,6 +22,7 @@
 - [x] [dynamic-imports](#dynamic-imports) - [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
 - [x] [webpack-bundle-analyzer usage](#webpack-bundle-analyzer)
 - [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh` (in progress)
+- [ ] [styled-components](#styled-components) - `styled-components`
 - [ ] [Global scripts](#global-scripts-sample) like `window.onload = (function() {})()`
 
 ### less
@@ -259,8 +260,7 @@ module: {
 ```
 > After `npm run build:prod` we have working server on [127.0.0.1](http://127.0.0.1:8888) to see analysis.
 > And also you can use `npm run stats` for have `stats.json` file as result.
-
-### postbuild-script-sample
+- [ ] `postbuild.sh` (in progress)  
 _`webpack.config.js`_
 ```js
 // ...
@@ -281,6 +281,28 @@ _`package.json`_
   "build:prod": "cross-env NODE_ENV=production webpack --mode production && npm run postbuild",
   // ...
 },
+```
+
+### styled-components
+```
+npm i -D babel-plugin-styled-components styled-components
+```
+_`webpack.config.js`_
+```js
+// ...
+const babelOptions = preset => {
+  const opts = {
+    // ...
+    plugins: [
+      // ...
+      'babel-plugin-styled-components',
+      // See also https://styled-components.com/docs/tooling#usage
+    ],
+  }
+  // ...
+  return opts;
+};
+// ...
 ```
 
 ### global-scripts-sample
