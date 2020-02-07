@@ -7,15 +7,34 @@
 - [x] file-loader
 - [x] alias
 - [x] optimization
-- [ ] [Подключение LESS](https://youtu.be/eSaF8NXeNsA?t=7153)
+- [ ] [less](#less) - [Подключение LESS](https://youtu.be/eSaF8NXeNsA?t=7153)
+- [ ] [scss](#scss) - [Подключение SCSS](https://youtu.be/eSaF8NXeNsA?t=7568)
+- [ ] [preprocessing](#preprocessing) - [Препроцессоры, Оптимизация конфига](https://youtu.be/eSaF8NXeNsA?t=7703)
+- [x] [Зачем нужен Babel](https://youtu.be/eSaF8NXeNsA?t=7861)
+- [x] [babel-pugins](#babel-pugins) - [Добавление плагинов для Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s)
+- [x] [babel-presets](#babel-presets) - [Babel: Пресеты и плагины](https://youtu.be/eSaF8NXeNsA?t=8153)
+- [x] [babel-polyfill](#babel-polyfill) - `@babel/polyfill` (as lib) usage
+- [x] `@babel/plugin-proposal-class-properties` [local link](#plugin-proposal-class-properties)
+- [ ] [typescript](#typescript) - [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
+- [x] [preset-react](#preset-react) - [Компиляция React JSX + оптимизация Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s)
+- [x] source-map for dev mode
+- [x] [ESLint](#eslint)
+- [x] [dynamic-imports](#dynamic-imports) - [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
+- [x] [webpack-bundle-analyzer usage](#webpack-bundle-analyzer)
+- [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh` (in progress)
+- [ ] [Global scripts](#global-scripts-sample) like `window.onload = (function() {})()`
+
+### less
 ```
 npm i -D less-loader
 ```
-- [ ] [Подключение SCSS](https://youtu.be/eSaF8NXeNsA?t=7568)
+
+### scss
 ```
 npm i -D node-sass sass-loader
 ```
-- [ ] [Препроцессоры: Оптимизация конфига](https://youtu.be/eSaF8NXeNsA?t=7703)
+
+### preprocessing
 ```js
 const cssLoaders = extra => {
   const loaders = [
@@ -44,12 +63,13 @@ module.exports = {
   ]
 // ...
 ```
-- [x] [Зачем нужен Babel](https://youtu.be/eSaF8NXeNsA?t=7861)
-- [x] [Добавление плагинов для Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8555s)
+
+### babel-pugins
 ```
 npm i -D babel-loader @babel/core
 ```
-- [x] [Babel: Пресеты и плагины](https://youtu.be/eSaF8NXeNsA?t=8153)
+
+### babel-presets
 > **Пресет** - Набор плагинов, для работы с js в современном формате.
 ```
 npm i -D @babel/preset-env
@@ -79,7 +99,8 @@ _`package.json`_
 ```json
 "browserlist": "> 0.25%, not dead",
 ```
-- [x] `@babel/polyfill` (as lib) usage
+
+### babel-polifyll
 > Для async/await одних пресетов недостаточно (нужно установить полифил).
 ```js
 // ...
@@ -88,13 +109,16 @@ module.exports = {
     main: ['@babel/polyfill', './index.js'],
 // ...
 ```
-- [x] `@babel/plugin-proposal-class-properties`
+
+### plugin-proposal-class-properties
 > **class** - Пока еще не стандарт языка (только предложение)
-- [ ] [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
+
+### typescript
 ```
 npm i -D @babel/preset-typescript
 ```
-- [x] [Компиляция React JSX + оптимизация Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s)
+
+### preset-react
 ```
 npm i -D @babel/preset-react
 ```
@@ -126,8 +150,8 @@ module: {
   ]
 }
 ```
-- [x] source-map for dev mode
-- [x] ESLint
+
+### eslint
 ```
 npm i -D eslint-loader
 npm i -D babel-eslint
@@ -178,7 +202,8 @@ _`.eslintrc`_
   ]
 }
 ```
-- [x] [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
+
+### dynamic-imports
 ```
 npm i lodash
 ```
@@ -190,7 +215,8 @@ import('lodash').then(_ => {
 });
 ```
 > After build we have additional separate chunk `dist/[name].js`
-- [x] [webpack-bundle-analyzer usage]()
+
+### webpack-bundle-analyzer
 > Плагин для анализа библиотек для оптимизации приложения
 ```
 npm i webpack-bundle-analyzer -D
@@ -233,7 +259,8 @@ module: {
 ```
 > After `npm run build:prod` we have working server on [127.0.0.1](http://127.0.0.1:8888) to see analysis.
 > And also you can use `npm run stats` for have `stats.json` file as result.
-- [ ] `postbuild.sh` (in progress)
+
+### postbuild-script-sample
 _`webpack.config.js`_
 ```js
 // ...
@@ -254,4 +281,24 @@ _`package.json`_
   "build:prod": "cross-env NODE_ENV=production webpack --mode production && npm run postbuild",
   // ...
 },
+```
+
+### global-scripts-sample
+_`webpack.config.js`_
+```js
+entry: {
+  main: ['@babel/polyfill', './index.jsx'],
+  // For example:
+  'fixed-header': './common/window-onload-sample.js',
+},
+output: {
+  filename: filename('js'),
+  path: path.resolve(__dirname, 'dist'),
+},
+```
+_And also you can add file for example: `./src/common/window-onload-sample.js`_
+```js
+window.onload = (function() {
+  console.log('window loaded...');
+})()
 ```
