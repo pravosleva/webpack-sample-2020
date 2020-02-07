@@ -99,6 +99,7 @@ module.exports = {
       // установить полифил)
       './index.jsx',
     ],
+    'window-onload': './common/window-onload-sample.js',
   },
   output: {
     filename: filename('js'),
