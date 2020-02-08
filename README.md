@@ -23,6 +23,7 @@
 - [x] [webpack-bundle-analyzer usage](#webpack-bundle-analyzer)
 - [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh` (in progress)
 - [x] [Global scripts](#global-scripts-sample) like `window.onload = (function() {})()`
+- [x] `window.toaster` example
 
 ### less
 ```
