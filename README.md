@@ -22,7 +22,7 @@
 - [x] [dynamic-imports](#dynamic-imports) - [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
 - [x] [webpack-bundle-analyzer usage](#webpack-bundle-analyzer)
 - [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh` (in progress)
-- [x] [Global scripts](#global-scripts-sample) like `window.onload = (function() {})()`
+- [x] [Global scripts](#global-scripts-sample) like `window.addEventListener('load', function() {})`
 - [x] `window.toaster` example
 
 ### less
