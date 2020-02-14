@@ -301,23 +301,3 @@ const babelOptions = preset => {
 };
 // ...
 ```
-
-### global-scripts-sample
-_`webpack.config.js`_
-```js
-entry: {
-  main: ['@babel/polyfill', './index.jsx'],
-  // For example:
-  'fixed-header': './common/window-onload-sample.js',
-},
-output: {
-  filename: filename('js'),
-  path: path.resolve(__dirname, 'dist'),
-},
-```
-_And also you can add file for example: `./src/common/window-onload-sample.js`_
-```js
-window.onload = (function() {
-  console.log('window loaded...');
-})()
-```

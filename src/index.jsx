@@ -3,15 +3,30 @@ import './css/styles.css';
 import WebpackLogo from '@/assets/webpack-logo.png';
 import tst from '@alias-tst/tst';
 import './babel';
-import React from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
 
 tst();
 console.log(WebpackLogo); // abd62e9b6096047730911a83833b04b6.png
 
-const App = () => (
-  <div>Hello jsx</div>
-);
+const App = () => {
+  const [text, setText] = useState('');
+  const onChange = e => setText(e.target.value);
+
+  return (
+    <>
+      <div style={{
+        maxWidth: '300px',
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
+        <span>text</span>
+        <input value={text} onChange={onChange} />
+      </div>
+    </>
+  );
+}
 
 render(<App />, document.getElementById('app'));
 
