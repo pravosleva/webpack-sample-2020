@@ -9,7 +9,7 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "ignorePatterns": ["node_modules/"],
+  "ignorePatterns": ["node_modules/", "src/sagas/__tests__"],
   "plugins": ["react"],
   "env": {
     "node": true,
