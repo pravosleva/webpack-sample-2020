@@ -1,4 +1,4 @@
-import { Toast } from "toaster-js"; // https://www.npmjs.com/package/toaster-js
+import { Toast } from 'toaster-js'; // https://www.npmjs.com/package/toaster-js
 import 'toaster-js/default.css';
 
 // new Toast("Welcome!");
@@ -30,7 +30,7 @@ class Toaster {
     removeFromDOMByClick = true,
     time = 'normal', // short|normal|long
   }) {
-    let element = document.createElement("div");
+    let element = document.createElement('div');
 
     element.textContent = text;
 
@@ -40,7 +40,7 @@ class Toaster {
       this.Toast[this.getOriginalTime(time)],
     );
 
-    element.addEventListener("click", () => {
+    element.addEventListener('click', () => {
       if (onClick) onClick();
       if (removeFromDOMByClick) newToast.delete();
     });
