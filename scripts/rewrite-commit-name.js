@@ -43,7 +43,6 @@ function cleanup() {
 }
 
 async function main() {
-  // let task = '';
   let branchName = '';
 
   try {
@@ -60,7 +59,7 @@ async function main() {
   try {
     writeBranchNameToTitleInFile(branchName, commitEditmsgFile);
   } catch(err) {
-    console.log('Не удалось записать имя ветки', branchName, 'в commit-msg файл', commitEditmsgFile);
+    console.log('🚫 Не удалось записать имя ветки', branchName, 'в commit-msg файл', commitEditmsgFile);
     console.error(err);
     process.exit(1);
   }
