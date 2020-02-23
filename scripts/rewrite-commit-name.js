@@ -27,10 +27,10 @@ function existBranchNameInFile(file, branchName) {
   return message.includes(branchName);
 }
 
-function writeBranchNameToTitleInFile(branchName, file) {
+function writeBranchNameToTitleInFile(branchNameAsLine, file) {
   const message = fs.readFileSync(file, 'utf8');
   const lines = message.split(EOL);
-  lines[0] = branchName + '. ' + lines[0];
+  lines[0] = branchNameAsLine + lines[0];
   const newLines = lines.join(EOL);
   fs.writeFileSync(file, newLines, 'utf8');
 }
