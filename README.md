@@ -20,9 +20,11 @@
 - [x] source-map for dev mode
 - [x] [ESLint](#eslint)
 - [x] [dynamic-imports](#dynamic-imports) - [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
-- [x] [webpack-bundle-analyzer usage](#webpack-bundle-analyzer)
+- [x] [webpack-bundle-analyzer](#webpack-bundle-analyzer)
 - [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh`
-- [ ] [styled-components](#styled-components) - `styled-components`
+- [ ] [styled-components](#styled-components)
+- [x] [webpack-dashboard](#webpack-dashboard)
+- [x] [error-overlay-webpack-plugin](#error-overlay-webpack-plugin)
 
 ### less
 ```
@@ -357,4 +359,47 @@ const babelOptions = preset => {
   return opts;
 };
 // ...
+```
+
+### webpack-dashboard
+```bash
+npm i -D webpack-dashboard
+```
+_`webpack.config.js`_
+```js
+// ...
+const DashboardPlugin = require('webpack-dashboard/plugin');
+// ...
+const plugins = () => {
+  // ...
+  if (isProd) base.push(new BundleAnalyzerPlugin({
+    openAnalyzer: false,
+    analyzerMode: 'static',
+  }));
+  if (isDev) base.push(new DashboardPlugin());
+  return base;
+};
+```
+
+### error-overlay-webpack-plugin
+```bash
+npm i -D error-overlay-webpack-plugin
+```
+_`webpack.config.js`_
+```js
+// ...
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+// ...
+const plugins = () => {
+  // ...
+  if (isProd) base.push(new BundleAnalyzerPlugin({
+    openAnalyzer: false,
+    analyzerMode: 'static',
+  }));
+  if (isDev) {
+    base.push(new DashboardPlugin());
+    base.push(new ErrorOverlayPlugin());
+  }
+  return base;
+};
 ```
