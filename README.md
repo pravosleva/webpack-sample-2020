@@ -15,13 +15,13 @@
 - [x] [babel-presets](#babel-presets) - [Babel: Пресеты и плагины](https://youtu.be/eSaF8NXeNsA?t=8153)
 - [x] [babel-polyfill](#babel-polyfill) - `@babel/polyfill` (as lib) usage
 - [x] `@babel/plugin-proposal-class-properties` [local link](#plugin-proposal-class-properties)
-- [ ] [typescript](#typescript) - [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
+- [x] [typescript](#typescript) - [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
 - [x] [preset-react](#preset-react) - [Компиляция React JSX + оптимизация Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s)
 - [x] source-map for dev mode
 - [x] [ESLint](#eslint)
 - [x] [dynamic-imports](#dynamic-imports) - [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
 - [x] [webpack-bundle-analyzer usage](#webpack-bundle-analyzer)
-- [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh` (in progress)
+- [x] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh` (in progress)
 - [x] [Global scripts](#global-scripts-sample) like `window.addEventListener('load', function() {})`
 - [x] `window.toaster` example
 
@@ -117,6 +117,48 @@ module.exports = {
 ### typescript
 ```
 npm i -D @babel/preset-typescript
+```
+_`webpack.config.js`_
+```js
+// ...
+module.exports = {
+  module: {
+    rules: [
+      // ...
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env', // Адаптация под разные браузеры
+              '@babel/preset-typescript',
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
+        },
+      },
+      {
+        test: /\.tsx$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-typescript',
+              '@babel/preset-react',
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
+        },
+      },
+      // ...
+    ]
+  }
+// ...
+}
 ```
 
 ### preset-react
@@ -253,9 +295,10 @@ const plugins = () => {
   return base;
 };
 // ...
-module: {
+module.exports = {
   // ...
   plugins: plugins(),
+  // ...
 }
 ```
 > After `npm run build:prod` we have working server on [127.0.0.1](http://127.0.0.1:8888) to see analysis.
@@ -287,19 +330,29 @@ _`package.json`_
 ### global-scripts-sample
 _`webpack.config.js`_
 ```js
-entry: {
-  main: ['@babel/polyfill', './index.jsx'],
-  // For example:
-  'fixed-header': './common/window-onload-sample.js',
-},
-output: {
-  filename: filename('js'),
-  path: path.resolve(__dirname, 'dist'),
-},
+module.exports = {
+  // ...
+  entry: {
+    main: ['@babel/polyfill', './index.jsx'],
+    // For example:
+    'fixed-header': './common/window-onload-sample.js',
+  },
+  output: {
+    filename: filename('js'),
+    path: path.resolve(__dirname, 'dist'),
+  },
+  // ...
+};
 ```
 _And also you can add file for example: `./src/common/window-onload-sample.js`_
 ```js
-window.onload = (function() {
+// WAY 1:
+// window.onload = (function() {
+//   console.log('window loaded...');
+// })();
+
+// WAY 2:
+window.addEventListener('load', function() {
   console.log('window loaded...');
-})()
+});
 ```

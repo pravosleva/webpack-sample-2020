@@ -107,7 +107,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.js', '.json', '.png'], // Для автоопределения расширений при
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.png'], // Для автоопределения расширений при
     // импорте
     alias: { // Для поиска по дефолту при указании абсолютного пути при импорте
       // внутри модулей:
@@ -153,7 +153,6 @@ module.exports = {
         exclude: /node_modules/,
         use: jsLoaders(),
       },
-      // TODO: @babel/preset-typescript
       { // React
         test: /\.jsx$/,
         exclude: /node_modules/,
@@ -164,7 +163,36 @@ module.exports = {
           },
           // 'eslint-loader',
         ],
-      }
+      },
+      { // TypeScript
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env', // Адаптация под разные браузеры
+              '@babel/preset-typescript',
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
+        },
+      },
+      { // TypeScript + React
+        test: /\.tsx$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-typescript',
+              '@babel/preset-react',
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
+        },
+      },
     ]
   }
 };

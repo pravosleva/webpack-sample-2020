@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { inc, dec, incAsync } from '@/actions/counter';
 
 

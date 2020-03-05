@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import tst from '@alias-tst/tst';
-import App from '@/App.jsx';
+import App from '@/App';
 import store from '@/store';
 import '@/css/styles.css';
 // import WebpackLogo from '@/assets/webpack-logo.png';
