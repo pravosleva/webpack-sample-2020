@@ -122,6 +122,7 @@ _`webpack.config.js`_
 ```js
 // ...
 module.exports = {
+  // ...
   module: {
     rules: [
       // ...
@@ -179,18 +180,21 @@ const babelOptions = preset => {
   return opts;
 };
 // ...
-module: {
-  rules: [
-    // ...
-    {
-      test: /\.jsx$/,
-      exclude: /node_modules/,
-      loader: {
-        loader: 'babel-loader',
-        options: babelOptions('@babel/preset-react'),
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      // ...
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: babelOptions('@babel/preset-react'),
+        },
       },
-    },
-  ]
+    ],
+  },
 }
 ```
 
@@ -212,16 +216,19 @@ const jsLoaders = () => {
   return loaders;
 };
 // ...
-module = {
-  rules: [
-    // ...
-    { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: jsLoaders(), // Уже с учетом eslint-loader
-    },
-    // ...
-  ],
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      // ...
+      { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: jsLoaders(), // Уже с учетом eslint-loader
+      },
+      // ...
+    ],
+  },
 };
 ```
 _`.eslintrc`_
