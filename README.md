@@ -21,9 +21,8 @@
 - [x] [ESLint](#eslint)
 - [x] [dynamic-imports](#dynamic-imports) - [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
 - [x] [webpack-bundle-analyzer usage](#webpack-bundle-analyzer)
-- [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh` (in progress)
+- [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh`
 - [ ] [styled-components](#styled-components) - `styled-components`
-- [ ] [Global scripts](#global-scripts-sample) like `window.onload = (function() {})()`
 
 ### less
 ```
@@ -79,6 +78,7 @@ _`webpack.config.js`_
 ```js
 // ...
 module.exports = {
+  // ...
   module: {
     rules: [
       // ...
