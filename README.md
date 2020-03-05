@@ -54,14 +54,18 @@ const cssLoaders = extra => {
 };
 // ...
 module.exports = {
-  rules: [
-    // ...
-    {
-      test: /\.less$/,
-      use: cssLoaders('less-loader'),
-    }
-  ]
-// ...
+  // ...
+  module: {
+    rules: [
+      // ...
+      {
+        test: /\.less$/,
+        use: cssLoaders('less-loader'),
+      }
+    ],
+  },
+  // ...
+};
 ```
 
 ### babel-pugins
