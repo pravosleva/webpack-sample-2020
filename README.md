@@ -78,23 +78,26 @@ npm i -D @babel/preset-env
 _`webpack.config.js`_
 ```js
 // ...
-module: {
-  rules: [
-    // ...
-    { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: {
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            '@babel/preset-env',
-          ],
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      // ...
+      { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+            ],
+          },
         },
-      },
-    }
-  ]
-}
+      }
+    ]
+  },
+};
 ```
 _`package.json`_
 ```json
@@ -122,6 +125,7 @@ _`webpack.config.js`_
 ```js
 // ...
 module.exports = {
+  // ...
   module: {
     rules: [
       // ...
@@ -179,19 +183,22 @@ const babelOptions = preset => {
   return opts;
 };
 // ...
-module: {
-  rules: [
-    // ...
-    {
-      test: /\.jsx$/,
-      exclude: /node_modules/,
-      loader: {
-        loader: 'babel-loader',
-        options: babelOptions('@babel/preset-react'),
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      // ...
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: babelOptions('@babel/preset-react'),
+        },
       },
-    },
-  ]
-}
+    ]
+  },
+};
 ```
 
 ### eslint
@@ -216,16 +223,19 @@ const jsLoaders = () => {
   return loaders;
 };
 // ...
-module = {
-  rules: [
-    // ...
-    { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: jsLoaders(), // Уже с учетом eslint-loader
-    },
-    // ...
-  ],
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      // ...
+      { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: jsLoaders(), // Уже с учетом eslint-loader
+      },
+      // ...
+    ],
+  },
 };
 ```
 _`.eslintrc`_
