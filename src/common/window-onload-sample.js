@@ -3,7 +3,7 @@
 // });
 
 window.addEventListener('load', function() {
-  window.toaster.message({
+  if (window && window.toaster) window.toaster.message({
     text: 'Hello',
     type: 'done',
     onClick: () => {

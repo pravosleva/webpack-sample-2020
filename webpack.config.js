@@ -5,13 +5,23 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 // For prod only:
 const OptimizeCssWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+// For dev only:
+// const DashboardPlugin = require('webpack-dashboard/plugin');
+
+// const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+// Doesn't work with some entry points =(
+// package.json scripts:
+// "dev": "cross-env NODE_ENV=development webpack-dashboard webpack-dev-server --mode development --history-api-fallback --inline --progress -- --open",
+
 const isDev = process.env.NODE_ENV === 'development';
-const isProd = !isDev;
+const isTest = process.env.NODE_ENV === 'test';
+const isProd = !isDev && !isTest;
 const optimization = () => {
   const config = {
     splitChunks: {
@@ -81,16 +91,22 @@ const plugins = () => {
     openAnalyzer: false,
     analyzerMode: 'static',
   }));
+  // if (isDev) {
+  //   base.push(new DashboardPlugin());
+  //   base.push(new ErrorOverlayPlugin());
+  // }
 
   return base;
 };
+function devtool() {  // function to set dev-tool depending on environment
+  if (isTest) return 'inline-source-map'
+  else if (isProd) return 'source-map'
+  else return 'cheap-module-source-map'; // 'eval-source-map' isn't supported
+}
 
 module.exports = {
-  devServer: {
-    port: 8000,
-    hot: isDev,
-  },
-  devtool: isDev ? 'source-map' : '',
+  devServer: { port: 8000, hot: isDev },
+  devtool: devtool(),
   context: path.resolve(__dirname, 'src'), // dir where source code is placed
   // mode: 'development', // Указано в package.json
   entry: {

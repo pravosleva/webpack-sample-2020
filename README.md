@@ -24,6 +24,8 @@
 - [x] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh` (in progress)
 - [x] [Global scripts](#global-scripts-sample) like `window.addEventListener('load', function() {})`
 - [x] `window.toaster` example
+- [ ] [webpack-dashboard](#webpack-dashboard)
+- [ ] [error-overlay-webpack-plugin](#error-overlay-webpack-plugin) _Doesn't work with some entry points =(_
 
 ### less
 ```
@@ -369,4 +371,47 @@ _And also you can add file for example: `./src/common/window-onload-sample.js`_
 window.addEventListener('load', function() {
   console.log('window loaded...');
 });
+```
+
+### webpack-dashboard
+```bash
+npm i -D webpack-dashboard
+```
+_`webpack.config.js`_
+```js
+// ...
+const DashboardPlugin = require('webpack-dashboard/plugin');
+// ...
+const plugins = () => {
+  // ...
+  if (isProd) base.push(new BundleAnalyzerPlugin({
+    openAnalyzer: false,
+    analyzerMode: 'static',
+  }));
+  if (isDev) base.push(new DashboardPlugin());
+  return base;
+};
+```
+
+### error-overlay-webpack-plugin
+```bash
+npm i -D error-overlay-webpack-plugin
+```
+_`webpack.config.js`_
+```js
+// ...
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+// ...
+const plugins = () => {
+  // ...
+  if (isProd) base.push(new BundleAnalyzerPlugin({
+    openAnalyzer: false,
+    analyzerMode: 'static',
+  }));
+  if (isDev) {
+    base.push(new DashboardPlugin());
+    base.push(new ErrorOverlayPlugin());
+  }
+  return base;
+};
 ```

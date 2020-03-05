@@ -7,6 +7,7 @@ import {
 import {
   INCREMENT,
   INCREMENT_ASYNC,
+  DECREMENT,
 } from '../actions/counter';
 
 
@@ -24,7 +25,7 @@ export function* incrementAsyncWorker() {
     });
   }
 }
-// Additional worker for example:
+// Additional workers for example:
 export function* incrementWorker() {
   if (window && window.toaster) {
     yield call(window.toaster.message, {
@@ -34,7 +35,17 @@ export function* incrementWorker() {
     });
   }
 }
+export function* decrementWorker() {
+  if (window && window.toaster) {
+    yield call(window.toaster.message, {
+      text: 'DEC DONE',
+      type: 'warning',
+      removeFromDOMByClick: true,
+    });
+  }
+}
 export function* watchIncrementAsync() {
   yield takeEvery(INCREMENT_ASYNC, incrementAsyncWorker);
   yield takeEvery(INCREMENT, incrementWorker);
+  yield takeEvery(DECREMENT, decrementWorker);
 }
