@@ -1,5 +1,4 @@
-
-echo "HELLO"
+echo "HELLO POSTBUILD SCRIPT"
 echo $?
 
 echo -ne '#####                     (33%)\r'

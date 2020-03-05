@@ -21,7 +21,7 @@
 - [x] [ESLint](#eslint)
 - [x] [dynamic-imports](#dynamic-imports) - [Dynamic imports usage sample (lazy loading)](https://youtu.be/eSaF8NXeNsA?t=9785)
 - [x] [webpack-bundle-analyzer](#webpack-bundle-analyzer)
-- [ ] [postbuild-script-sample](#postbuild-script-sample) - `postbuild.sh`
+- [x] [postbuild-script-sample](#postbuild-script-sample)
 - [ ] [styled-components](#styled-components)
 - [x] [webpack-dashboard](#webpack-dashboard)
 - [x] [error-overlay-webpack-plugin](#error-overlay-webpack-plugin)
@@ -337,6 +337,20 @@ _`package.json`_
   "build:prod": "cross-env NODE_ENV=production webpack --mode production && npm run postbuild",
   // ...
 },
+```
+_`postbuild.sh`_
+```bash
+echo "HELLO POSTBUILD SCRIPT"
+echo $?
+
+echo -ne '#####                     (33%)\r'
+sleep 1
+echo -ne '#############             (66%)\r'
+sleep 1
+echo -ne '#######################   (100%)\r'
+echo -ne '\n'
+
+exit 0
 ```
 
 ### styled-components
