@@ -1,34 +1,22 @@
-import './css/styles.css';
-// import WebpackLogo from './assets/webpack-logo.png'; // For example
-import WebpackLogo from '@/assets/webpack-logo.png';
-import tst from '@alias-tst/tst';
-import './babel';
-import React, { useState } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+
+import tst from '@alias-tst/tst';
+import App from '@/App';
+import store from '@/store';
+import '@/css/styles.css';
+// import WebpackLogo from '@/assets/webpack-logo.png';
 
 tst();
-console.log(WebpackLogo); // abd62e9b6096047730911a83833b04b6.png
+// console.log(WebpackLogo); // abd62e9b6096047730911a83833b04b6.png
 
-const App = () => {
-  const [text, setText] = useState('');
-  const onChange = e => setText(e.target.value);
-
-  return (
-    <>
-      <div style={{
-        maxWidth: '300px',
-        margin: '0 auto',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        <span>text</span>
-        <input value={text} onChange={onChange} />
-      </div>
-    </>
-  );
-}
-
-render(<App />, document.getElementById('app'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);
 
 // Dynamic import sample: npm i lodash
 // import('lodash').then(_ => {

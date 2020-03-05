@@ -1,0 +1,66 @@
+{
+  "env": {
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "shippedProposals": true,
+            "targets": {
+              "node": "8.9.4"
+            }
+          }
+        ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        ["lodash", { "id": ["lodash", "recompose"] }],
+        "babel-plugin-dynamic-import-node",
+        "babel-plugin-polished",
+        "@babel/plugin-syntax-import-meta",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-json-strings",
+        [
+          "@babel/plugin-proposal-decorators",
+          {
+            "legacy": true
+          }
+        ],
+        "@babel/plugin-proposal-function-sent",
+        "@babel/plugin-proposal-export-namespace-from",
+        "@babel/plugin-proposal-numeric-separator",
+        "@babel/plugin-proposal-throw-expressions"
+      ]
+    },
+    "development": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "shippedProposals": true,
+            "targets": {
+              "node": "8.9.4"
+            }
+          }
+        ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "babel-plugin-dynamic-import-node",
+        "@babel/plugin-syntax-import-meta",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-json-strings",
+        [
+          "@babel/plugin-proposal-decorators",
+          {
+            "legacy": true
+          }
+        ],
+        "@babel/plugin-proposal-function-sent",
+        "@babel/plugin-proposal-export-namespace-from",
+        "@babel/plugin-proposal-numeric-separator",
+        "@babel/plugin-proposal-throw-expressions"
+      ]
+    }
+  }
+}

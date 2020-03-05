@@ -15,7 +15,7 @@
 - [x] [babel-presets](#babel-presets) - [Babel: Пресеты и плагины](https://youtu.be/eSaF8NXeNsA?t=8153)
 - [x] [babel-polyfill](#babel-polyfill) - `@babel/polyfill` (as lib) usage
 - [x] `@babel/plugin-proposal-class-properties` [local link](#plugin-proposal-class-properties)
-- [ ] [typescript](#typescript) - [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
+- [x] [typescript](#typescript) - [Компиляция TypeScript](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8668s)
 - [x] [preset-react](#preset-react) - [Компиляция React JSX + оптимизация Babel](https://www.youtube.com/watch?v=eSaF8NXeNsA&t=8840s)
 - [x] source-map for dev mode
 - [x] [ESLint](#eslint)
@@ -78,22 +78,22 @@ npm i -D @babel/preset-env
 _`webpack.config.js`_
 ```js
 // ...
-module: {
-  rules: [
-    // ...
-    { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: {
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            '@babel/preset-env',
-          ],
+module.exports = {
+  module: {
+    rules: [
+      // ...
+      { // Babel: Пропускаем все .js через babel-loader (кроме node_modules)
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
         },
-      },
-    }
-  ]
+      }
+    ],
+  },
 }
 ```
 _`package.json`_
@@ -117,6 +117,48 @@ module.exports = {
 ### typescript
 ```
 npm i -D @babel/preset-typescript
+```
+_`webpack.config.js`_
+```js
+// ...
+module.exports = {
+  module: {
+    rules: [
+      // ...
+      { // TypeScript
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env', // Адаптация под разные браузеры
+              '@babel/preset-typescript',
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
+        },
+      },
+      { // TypeScript + React
+        test: /\.tsx$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-typescript',
+              '@babel/preset-react',
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
+        },
+      },
+      // ...
+    ]
+  }
+// ...
+}
 ```
 
 ### preset-react
@@ -249,9 +291,13 @@ const plugins = () => {
   return base;
 };
 // ...
-module: {
+module.exports = {
   // ...
-  plugins: plugins(),
+  module: {
+    // ...
+    plugins: plugins(),
+  }
+  // ...
 }
 ```
 > After `npm run build:prod` we have working server on [127.0.0.1](http://127.0.0.1:8888) to see analysis.
