@@ -23,7 +23,7 @@
 - [x] [webpack-bundle-analyzer](#webpack-bundle-analyzer)
 - [x] [postbuild-script-sample](#postbuild-script-sample)
 - [ ] [styled-components](#styled-components)
-- [x] [webpack-dashboard](#webpack-dashboard)
+- [ ] [webpack-dashboard](#webpack-dashboard)
 - [x] [error-overlay-webpack-plugin](#error-overlay-webpack-plugin)
 
 ### less
@@ -386,11 +386,10 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 // ...
 const plugins = () => {
   // ...
-  if (isProd) base.push(new BundleAnalyzerPlugin({
-    openAnalyzer: false,
-    analyzerMode: 'static',
-  }));
-  if (isDev) base.push(new DashboardPlugin());
+  if (isDev) {
+    // ...
+    base.push(new DashboardPlugin());
+  }
   return base;
 };
 ```
@@ -406,12 +405,8 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 // ...
 const plugins = () => {
   // ...
-  if (isProd) base.push(new BundleAnalyzerPlugin({
-    openAnalyzer: false,
-    analyzerMode: 'static',
-  }));
   if (isDev) {
-    base.push(new DashboardPlugin());
+    // ...
     base.push(new ErrorOverlayPlugin());
   }
   return base;

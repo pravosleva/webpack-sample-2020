@@ -9,7 +9,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const DashboardPlugin = require('webpack-dashboard/plugin'); // Dashbrd in console for dev
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -83,10 +82,7 @@ const plugins = () => {
     openAnalyzer: false,
     analyzerMode: 'static',
   }));
-  if (isDev) {
-    base.push(new DashboardPlugin());
-    base.push(new ErrorOverlayPlugin());
-  }
+  if (isDev) base.push(new ErrorOverlayPlugin());
 
   return base;
 };
