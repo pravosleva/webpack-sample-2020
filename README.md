@@ -107,7 +107,7 @@ _`package.json`_
 "browserlist": "> 0.25%, not dead",
 ```
 
-### babel-polifyll
+### babel-polyfill
 > Для async/await одних пресетов недостаточно (нужно установить полифил).
 ```js
 // ...
