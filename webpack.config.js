@@ -177,7 +177,7 @@ module.exports = {
             loader: 'babel-loader',
             options: babelOptions('@babel/preset-react'),
           },
-          // 'eslint-loader',
+          // 'eslint-loader', // Already added for dev mode
         ],
       },
       { // TypeScript
